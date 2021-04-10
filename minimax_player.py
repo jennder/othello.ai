@@ -1,3 +1,5 @@
+from player_interface import PlayerInterface 
+
 """A minimax player who maximizes their move assuming
 others are adversarial players.
 """
