@@ -27,6 +27,7 @@ class Referee:
     def play_game(self):
         """
         Plays a game of Othello.
+        -> Void
         """
         while(not self.__game_tree.is_game_over()):
             if (self.__game_tree.curr_turn == BLACK):
