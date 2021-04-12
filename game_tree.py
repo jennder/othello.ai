@@ -18,7 +18,7 @@ class GameTree:
         void -> Boolean
         """
         return len(self.board.get_valid_moves(BLACK)) == 0 and \
-            len(self.board.get_valid_moves(WHITE) == 0
+            len(self.board.get_valid_moves(WHITE)) == 0
 
     def get_actions(self):
         """
@@ -39,7 +39,7 @@ class GameTree:
         Posn -> [Maybe GameTree]
         """
         # lazy generation
-        if m in self.children:
+        if move in self.children:
             return self.children[move]
         
         # otherwise need to generate the child
