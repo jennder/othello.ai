@@ -46,7 +46,7 @@ class GameTree:
         # TODO need to check if its valid? because board assumes it is valid
         next_board = self.board.apply_move(move, self.curr_turn)
         self.children[move] = GameTree(next_board, self.next_turn)
-        return self.children[move] #TODO really need to return gt here?
+        return self.children[move] 
     
     def next_turn(self):
         """
@@ -58,3 +58,11 @@ class GameTree:
             return BLACK
         else:
             return WHITE
+
+    def get_score(self, color):
+        """
+        Get the score for the given player in this game.
+
+        Color -> Natural
+        """
+        return 0 #TODO implement
