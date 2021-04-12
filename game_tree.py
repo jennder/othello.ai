@@ -65,4 +65,4 @@ class GameTree:
 
         Color -> Natural
         """
-        return 0 #TODO implement
+        return self.board.get_score(color)

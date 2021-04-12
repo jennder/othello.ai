@@ -88,6 +88,13 @@ class Board:
             col_str = [word if word else "mt" for word in col]
             print("".join(word.ljust(8) for word in col_str))
 
+    def get_score(self, player):
+        """
+        Gets the score of the given player by how many pieces they have on the board
+        Color -> Nat
+        """
+        return len(self.__get_of_color(self.board, player))
+
     def __get_line_end(self, board, start, dx, dy, color, target=None):
         """
         Gets coordinates of the first empty space after a continuous line of opponent
