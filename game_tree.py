@@ -13,17 +13,24 @@ class GameTree:
     def is_game_over(self):
         """
         Whether the game has ended, when neither player can make another move
+        # TODO check if this is actually the condition where game over
+
+        void -> Boolean
         """
-        # TODO
-        return False
+        return len(self.board.get_valid_moves(BLACK)) == 0 and \
+            len(self.board.get_valid_moves(WHITE) == 0
 
     def get_actions(self):
         """
-        Lazily generates the next layer of the tree and returns the list of valid
-        actions from the current state
+        Lazily generates the next layer of the tree and returns the next layer of the 
+        game tree, a mapping of moves to the next game tree state
+
+        void -> {Move : GameTree}
         """
-        # TODO
-        return {}
+        moves = self.board.get_valid_moves(self.curr_turn)
+        for m in moves:
+            self.apply_move(m)
+        return self.children
 
     def apply_move(self, move):
         """
@@ -31,5 +38,23 @@ class GameTree:
         state if it is valid.
         Posn -> [Maybe GameTree]
         """
-        # TODO
-        return self
+        # lazy generation
+        if m in self.children:
+            return self.children[move]
+        
+        # otherwise need to generate the child
+        # TODO need to check if its valid? because board assumes it is valid
+        next_board = self.board.apply_move(move, self.curr_turn)
+        self.children[move] = GameTree(next_board, self.next_turn)
+        return self.children[move] #TODO really need to return gt here?
+    
+    def next_turn(self):
+        """
+        Get the player whose turn is next.
+        
+        void -> Color
+        """
+        if self.curr_turn == WHITE:
+            return BLACK
+        else:
+            return WHITE
