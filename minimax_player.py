@@ -1,4 +1,7 @@
-from player_interface import PlayerInterface 
+from player_interface import PlayerInterface
+from game_tree import GameTree
+import math
+from operations import ge, le
 
 """A minimax player who maximizes their move assuming
 others are adversarial players.
@@ -47,10 +50,10 @@ class MinimaxPlayer(PlayerInterface):
                 next_score = next_move_score[1]
                 #TODO i have no idea if this will work :)
             move_score.append((m, next_score))
-        best = get_best(maximize, move_score)
+        best = self.get_best_action(maximize, move_score)
         return best
 
-    def get_best_action(maximize, move_scores):
+    def get_best_action(self, maximize, move_scores):
         """
         Get the best move, either maximize or minimize the score
 
@@ -68,7 +71,6 @@ class MinimaxPlayer(PlayerInterface):
                 best_score = score
                 best_move = move
         return (best_move, best_score)
-
 
     def set_color(self, color):
         """
