@@ -38,7 +38,7 @@ class Referee:
             else:
                 move = self.__white_player.get_move(self.__game_tree.board)
             valid_actions = self.__game_tree.get_actions()
-            if (move == SKIP and valid_actions == SKIP) or move in valid_actions:
+            if (move == SKIP and SKIP in valid_actions) or move in valid_actions:
                 self.update_players(move)
                 print("%s MOVED %s" % (self.__game_tree.curr_turn, move))
                 self.__game_tree = self.__game_tree.apply_move(move)

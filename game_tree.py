@@ -5,10 +5,10 @@ Game Tree where the current state is the state of the board and the current turn
 the children are a mapping of possible actions to GameTrees with the resulting board state 
 """
 class GameTree:
-    def __init__(self, board, curr_turn, children = {}):
+    def __init__(self, board, curr_turn, children=None):
         self.board = board
         self.curr_turn = curr_turn
-        self.children = children
+        self.children = children or {}
 
     def __eq__(self, other):
         return type(other) is GameTree and self.board == other.board
@@ -52,7 +52,7 @@ class GameTree:
         
         # otherwise need to generate the child
         if move == SKIP:
-            self.children[move] = GameTree(self.board, self.next_turn())
+            self.children[move] = GameTree(self.board.copy(), self.next_turn())
         else:
             # TODO need to check if its valid? because board assumes it is valid
             next_board = self.board.apply_move(move, self.curr_turn)
