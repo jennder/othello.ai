@@ -1,4 +1,4 @@
-from constants import BLACK, WHITE
+from constants import BLACK, WHITE, SKIP
 from board import Board
 from game_tree import GameTree
 
@@ -10,9 +10,9 @@ class Referee:
 
     def __init__(self, players):
         self.__observers = []
-        self.init_game(players)
+        self.__init_game(players)
 
-    def init_game(self, players):
+    def __init_game(self, players):
         """
         Sets up an initial game of Othello with the given players (must be exactly 2).
         The first player in the list is assigned the black tokens, and the second white
@@ -31,9 +31,11 @@ class Referee:
         """
         while(not self.__game_tree.is_game_over()):
             if (self.__game_tree.curr_turn == BLACK):
-                move = self.__black_player.get_move()
+                move = self.__black_player.get_move(self.__game_tree.board)
             else:
-                move = self.__white_player.get_move()
-        return move # get rid of this >:(
-            # check that move is valid and apply it or something
-
+                move = self.__white_player.get_move(self.__game_tree.board)
+            valid_actions = self.__game_tree.get_actions()
+            if (move == SKIP and valid_actions == SKIP or move in list(valid_actions.keys())):
+                print("%s MOVED %s" % (self.__game_tree.curr_turn, move))
+                self.__game_tree = self.__game_tree.apply_move(move)
+                self.__game_tree.board.render()

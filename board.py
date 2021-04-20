@@ -93,7 +93,7 @@ class Board:
         Gets the score of the given player by how many pieces they have on the board
         Color -> Nat
         """
-        return len(self.__get_of_color(self.board, player))
+        return len(self.__get_of_color(self, player))
 
     def __get_line_end(self, board, start, dx, dy, color, target=None):
         """
@@ -112,6 +112,8 @@ class Board:
         while (board.board[y][x] == op_color):
             x += dx
             y += dy
+            if self.__outside_board(x, y):
+                return None
         return (x,y) if board.board[y][x] == target and not self.__outside_board(x, y) else None
 
     def __get_of_color(self, board, color):

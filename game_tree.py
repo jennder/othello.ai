@@ -1,4 +1,4 @@
-from constants import BLACK, WHITE
+from constants import BLACK, WHITE, SKIP
 
 """
 Game Tree where the current state is the state of the board and the current turn, and
@@ -30,22 +30,27 @@ class GameTree:
         moves = self.board.get_valid_moves(self.curr_turn)
         for m in moves:
             self.apply_move(m)
+        if self.children == None:
+            self.apply_move(SKIP)
         return self.children
 
     def apply_move(self, move):
         """
         Applies the given move to the current state and updates the tree to the next
         state if it is valid.
-        Posn -> [Maybe GameTree]
+        Posn -> [GameTree]
         """
         # lazy generation
         if move in self.children:
             return self.children[move]
         
         # otherwise need to generate the child
-        # TODO need to check if its valid? because board assumes it is valid
-        next_board = self.board.apply_move(move, self.curr_turn)
-        self.children[move] = GameTree(next_board, self.next_turn)
+        if move == SKIP:
+            self.children[move] = GameTree(self.board, self.next_turn())
+        else:
+            # TODO need to check if its valid? because board assumes it is valid
+            next_board = self.board.apply_move(move, self.curr_turn)
+            self.children[move] = GameTree(next_board, self.next_turn())
         return self.children[move] 
     
     def next_turn(self):

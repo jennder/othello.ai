@@ -1,7 +1,9 @@
 from player_interface import PlayerInterface
 from game_tree import GameTree
+from constants import SKIP
+import copy
 import math
-from operations import ge, le
+from operator import ge, le
 
 """A minimax player who maximizes their move assuming
 others are adversarial players.
@@ -13,7 +15,6 @@ class MinimaxPlayer(PlayerInterface):
         #TODO: needs game tree and its own color
         self.game_tree = None
         self.color = None
-        pass
 
     def get_move(self, board):
         """
@@ -26,18 +27,21 @@ class MinimaxPlayer(PlayerInterface):
         best_action = self.__get_minimax_score(tree, self.DEPTH * 2) # *2 for num players
         return best_action[0]
     
-    def __get_minimax_score(self, tree, depth):
+    def __get_minimax_score(self, tree, depth):i
         """
         Compute the minimax move and score for this player.
         Depth is mumber of layers of tree to look through, and number of turns for this player.
 
         GameTree Natural -> (Move, Natural)
         """
-        # the game has ended, TODO skip turn?
+        # the game has ended, this should never be reached
         if tree.is_game_over():
             return (None, tree.get_score(self.color))
-        
-        moves = tree.get_actions()
+        moves = copy.deepcopy(tree.get_actions())
+
+        # Skip if there are no possible moves
+        if (len(moves.keys()) == 0):
+            return SKIP
         move_score = []
         maximize = tree.curr_turn == self.color
         
