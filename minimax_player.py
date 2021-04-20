@@ -27,7 +27,7 @@ class MinimaxPlayer(PlayerInterface):
         best_action = self.__get_minimax_score(tree, self.DEPTH * 2) # *2 for num players
         return best_action[0]
     
-    def __get_minimax_score(self, tree, depth):i
+    def __get_minimax_score(self, tree, depth):
         """
         Compute the minimax move and score for this player.
         Depth is mumber of layers of tree to look through, and number of turns for this player.
