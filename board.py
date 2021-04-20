@@ -59,7 +59,7 @@ class Board:
         """
         new_board = self.copy()
         x, y = posn
-        dir = None
+        dirs = []
         # Place at posn
         if new_board.board[y][x] == None:
             new_board.board[y][x] = player
@@ -68,19 +68,19 @@ class Board:
             for dy in range(-1,2):
                 end = self.__get_line_end(new_board, posn, dx, dy, player, target=player)
                 if not end == None:
-                    dir = (dx, dy)
-                    break
-            else:
-                continue
-            break
+                    dirs.append(((dx, dy), end))
+
         # Flip pieces in between
-        dx,dy = dir
-        x += dx
-        y += dy
-        while not (x,y) == end:
-            new_board.board[y][x] = player
+        for dir in dirs:
+            delta, target = dir
+            dx, dy = delta
+            x, y = posn
             x += dx
             y += dy
+            while not (x,y) == target:
+                new_board.board[y][x] = player
+                x += dx
+                y += dy
         return new_board
 
     def render(self):

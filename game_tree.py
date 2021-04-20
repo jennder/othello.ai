@@ -56,9 +56,7 @@ class GameTree:
         else:
             # TODO need to check if its valid? because board assumes it is valid
             next_board = self.board.apply_move(move, self.curr_turn)
-            print(self.curr_turn)
             self.children[move] = GameTree(next_board, self.next_turn())
-            print(self.curr_turn, self.next_turn(), "should be", self.children[move].curr_turn)
         return self.children[move] 
     
     def next_turn(self):

@@ -2,6 +2,8 @@ from constants import BLACK, WHITE, SKIP
 from board import Board
 from game_tree import GameTree
 
+DEBUG = False
+
 """
 The referee oversees the playing of a game of Othello between two players,
 ensures that valid moves are made, and determines the winner.
@@ -40,10 +42,11 @@ class Referee:
             valid_actions = self.__game_tree.get_actions()
             if (move == SKIP and SKIP in valid_actions) or move in valid_actions:
                 self.update_players(move)
-                print("%s MOVED %s" % (self.__game_tree.curr_turn, move))
                 self.__game_tree = self.__game_tree.apply_move(move)
-                print(self.__game_tree.curr_turn)
-                self.__game_tree.board.render()
+                if DEBUG:
+                    print("%s MOVED %s" % (self.__game_tree.curr_turn, move))
+                    self.__game_tree.board.render()
+        return { BLACK: self.__game_tree.get_score(BLACK), WHITE: self.__game_tree.get_score(WHITE) }
     
     def update_players(self, move):
         self.__black_player.update_move(move)

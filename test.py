@@ -5,8 +5,13 @@ from referee import Referee
 
 def board_test():
     b = Board()
+    moves = b.get_valid_moves(BLACK)
+    print(moves == [(2, 3), (4, 5), (3, 2), (5, 4)])
+
+def board_game_test():
+    b = Board()
     b.render()
-    for _ in range(0, 5):
+    for _ in range(0, 20):
         moves = b.get_valid_moves(BLACK)
         print("MOVES", moves, BLACK)
         new_b = b.apply_move(moves[0], BLACK)
@@ -21,7 +26,9 @@ def minimax_test():
     player1 = MinimaxPlayer()
     player2 = MinimaxPlayer()
     ref = Referee([player1, player2])
-    ref.play_game()
+    scores = ref.play_game()
+    print("MINIMAX GAME RESULTS: ", scores)
 
 minimax_test()
+# board_game_test()
 # board_test()
