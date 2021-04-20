@@ -15,6 +15,9 @@ class Board:
         self.board = [[None] * self.BOARD_SIZE for _ in range(0, self.BOARD_SIZE)]
         self.__initialize_board()
 
+    def __eq__(self, other):
+        return type(other) is Board and self.board == other.board
+
     def __initialize_board(self):
         """
         Start a new game of Othello with standard setup.

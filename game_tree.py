@@ -10,6 +10,12 @@ class GameTree:
         self.curr_turn = curr_turn
         self.children = children
 
+    def __eq__(self, other):
+        return type(other) is GameTree and self.board == other.board
+
+    def __ne__(self, other):
+        return type(other) is not GameTree and self.board != other.board
+
     def is_game_over(self):
         """
         Whether the game has ended, when neither player can make another move
@@ -30,9 +36,9 @@ class GameTree:
         moves = self.board.get_valid_moves(self.curr_turn)
         for m in moves:
             self.apply_move(m)
-        if self.children == None:
+        if len(moves) == 0:
             self.apply_move(SKIP)
-        return self.children
+        return list(self.children.keys())
 
     def apply_move(self, move):
         """
@@ -50,7 +56,9 @@ class GameTree:
         else:
             # TODO need to check if its valid? because board assumes it is valid
             next_board = self.board.apply_move(move, self.curr_turn)
+            print(self.curr_turn)
             self.children[move] = GameTree(next_board, self.next_turn())
+            print(self.curr_turn, self.next_turn(), "should be", self.children[move].curr_turn)
         return self.children[move] 
     
     def next_turn(self):

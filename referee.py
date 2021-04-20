@@ -29,13 +29,22 @@ class Referee:
         Plays a game of Othello.
         -> Void
         """
+        self.__black_player.set_gametree(GameTree(Board(), BLACK))
+        self.__white_player.set_gametree(GameTree(Board(), BLACK))
+
         while(not self.__game_tree.is_game_over()):
             if (self.__game_tree.curr_turn == BLACK):
                 move = self.__black_player.get_move(self.__game_tree.board)
             else:
                 move = self.__white_player.get_move(self.__game_tree.board)
             valid_actions = self.__game_tree.get_actions()
-            if (move == SKIP and valid_actions == SKIP or move in list(valid_actions.keys())):
+            if (move == SKIP and valid_actions == SKIP) or move in valid_actions:
+                self.update_players(move)
                 print("%s MOVED %s" % (self.__game_tree.curr_turn, move))
                 self.__game_tree = self.__game_tree.apply_move(move)
+                print(self.__game_tree.curr_turn)
                 self.__game_tree.board.render()
+    
+    def update_players(self, move):
+        self.__black_player.update_move(move)
+        self.__white_player.update_move(move)
