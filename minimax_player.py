@@ -46,7 +46,8 @@ class MinimaxPlayer(PlayerInterface):
         if (len(moves) == 0):
             return (SKIP, 0)
         move_score = []
-        #print(moves.keys())
+        print(moves)
+        print(len(moves))
         maximize = tree.curr_turn == self.color
         # print("=== player", maximize, tree.curr_turn, self.color)
         # print(depth)
@@ -68,7 +69,7 @@ class MinimaxPlayer(PlayerInterface):
                 #TODO i have no idea if this will work :)
                 move_score.append((m, next_score))
         best = self.get_best_action(maximize, move_score)
-        # print(best, "\n\n")
+        print(self.color, best, "\n\n")
         return best
 
     def get_best_action(self, maximize, move_scores):
