@@ -25,3 +25,13 @@ class PlayerInterface:
         Color -> void
         """
         pass
+
+    def update_move(self, move):
+        """TODO
+        """
+        pass
+
+    def set_gametree(self, tree):
+        """TODO
+        """
+        pass
