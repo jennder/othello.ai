@@ -11,7 +11,7 @@ class MinimaxPlayer(PlayerInterface):
 
     def __init__(self, depth=2):
         super().__init__()
-        self.DEPTH = depth
+        self.depth = depth
 
     def get_move(self, board):
         """
@@ -20,7 +20,7 @@ class MinimaxPlayer(PlayerInterface):
         Board -> Posn
         """
         tree = self.game_tree
-        best_action = self.get_minimax_score(tree, self.DEPTH * 2) # *2 for num players
+        best_action = self.get_minimax_score(tree, self.depth * 2) # *2 for num players
         return best_action[0]
     
     def get_minimax_score(self, tree, depth):
