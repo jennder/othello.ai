@@ -1,7 +1,6 @@
 from player_interface import PlayerInterface
 from game_tree import GameTree
 from constants import SKIP
-import copy
 import math
 from operator import ge, le
 
@@ -10,10 +9,6 @@ others are adversarial players.
 """
 class MinimaxPlayer(PlayerInterface):
     DEPTH = 2
-
-    def __init__(self):
-        self.game_tree = None
-        self.color = None
 
     def get_move(self, board):
         """
@@ -35,7 +30,7 @@ class MinimaxPlayer(PlayerInterface):
         # the game has ended, this should never be reached
         if tree.is_game_over():
             return (None, tree.get_score(self.color))
-        moves = copy.deepcopy(tree.get_actions())
+        moves = tree.get_actions()
         # Skip if there are no possible moves
         if (len(moves) == 0):
             return (SKIP, 0)
