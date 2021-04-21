@@ -15,7 +15,6 @@ class GreedyPlayer(PlayerInterface):
         Board -> Posn
         """
         tree = self.game_tree
-        # the game has ended, this should never be reached
         if tree.is_game_over():
             return (None, tree.get_score(self.color))
         moves = tree.get_actions()

@@ -30,7 +30,7 @@ class MinimaxPlayer(PlayerInterface):
 
         GameTree Natural -> (Move, Natural)
         """
-        # the game has ended, this should never be reached
+        # the game has ended
         if tree.is_game_over():
             return (None, tree.get_score(self.color))
         moves = tree.get_actions()
