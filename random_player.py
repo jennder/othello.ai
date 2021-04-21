@@ -10,8 +10,8 @@ class RandomPlayer(PlayerInterface):
 
     def get_move(self, board):
         """
-        Returns the maximal move for this AI player to have the highest score at the
-        end of this move.
+        Returns the a random move for this AI player from all possible moves
+        with equal probability.
 
         Board -> Posn
         """

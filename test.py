@@ -4,6 +4,7 @@ from minimax_player import MinimaxPlayer
 from greedy_player import GreedyPlayer
 from random_player import RandomPlayer
 from expectimax_player import ExpectimaxPlayer
+from ids_player import IterativeDeepeningPlayer
 from referee import Referee
 
 def board_test():
@@ -37,6 +38,7 @@ def game_test(player1, player2):
     scores = ref.play_game()
     print("MINIMAX GAME RESULTS: ", scores)
 
+# game_test(IterativeDeepeningPlayer(), IterativeDeepeningPlayer())
 # game_test(MinimaxPlayer(), MinimaxPlayer())
 # game_test(GreedyPlayer(), GreedyPlayer())
 # game_test(RandomPlayer(), RandomPlayer())

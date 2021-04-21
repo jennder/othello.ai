@@ -14,14 +14,6 @@ class PlayerInterface:
         """
         pass
 
-    def update_with_move(self, posn):
-        """
-        Used to update internal state of player's game tree.
-
-        Posn -> void
-        """
-        pass
-
     def set_color(self, color):
         """
         Let this player know their color.

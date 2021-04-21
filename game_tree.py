@@ -77,3 +77,27 @@ class GameTree:
         Color -> Natural
         """
         return self.board.get_score(color)
+
+    def get_winner(self):
+        """Get the winner of the game if there is one. 
+        False if there is no winner (the game is not over or it is a tie).
+
+        void -> [Maybe Player]
+        """
+        if self.is_game_over():
+            return self.get_leader()
+        return False
+
+    def get_leader(self):
+        """Get the player with the leading score. False if they are tied
+
+        void -> [Maybe Player]
+        """
+        # determine who has more points
+        blk_score = self.get_score(BLACK)
+        wht_score = self.get_score(WHITE)
+        if blk_score > wht_score:
+            return BLACK
+        elif wht_score > blk_score:
+            return WHITE
+        return False
