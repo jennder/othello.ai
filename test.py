@@ -3,6 +3,7 @@ from constants import BLACK, WHITE
 from minimax_player import MinimaxPlayer
 from greedy_player import GreedyPlayer
 from random_player import RandomPlayer
+from expectimax_player import ExpectimaxPlayer
 from referee import Referee
 
 def board_test():
@@ -39,5 +40,6 @@ def game_test(player1, player2):
 # game_test(MinimaxPlayer(), MinimaxPlayer())
 # game_test(GreedyPlayer(), GreedyPlayer())
 # game_test(RandomPlayer(), RandomPlayer())
+# game_test(ExpectimaxPlayer(), ExpectimaxPlayer())
 # board_game_test()
 # board_test()

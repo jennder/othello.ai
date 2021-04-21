@@ -5,10 +5,13 @@ import math
 from operator import ge, le
 
 """A minimax player who maximizes their move assuming
-others are adversarial players.
+others are adversarial players. Depth of 2 by default.
 """
 class MinimaxPlayer(PlayerInterface):
-    DEPTH = 2
+
+    def __init__(self, depth=2):
+        super().__init__()
+        self.DEPTH = depth
 
     def get_move(self, board):
         """
@@ -17,10 +20,10 @@ class MinimaxPlayer(PlayerInterface):
         Board -> Posn
         """
         tree = self.game_tree
-        best_action = self.__get_minimax_score(tree, self.DEPTH * 2) # *2 for num players
+        best_action = self.get_minimax_score(tree, self.DEPTH * 2) # *2 for num players
         return best_action[0]
     
-    def __get_minimax_score(self, tree, depth):
+    def get_minimax_score(self, tree, depth):
         """
         Compute the minimax move and score for this player.
         Depth is mumber of layers of tree to look through, and number of turns for this player.
@@ -45,7 +48,7 @@ class MinimaxPlayer(PlayerInterface):
         else:
             for m in moves:
                 next_game = tree.children[m]
-                next_move_score = self.__get_minimax_score(next_game, depth - 1)
+                next_move_score = self.get_minimax_score(next_game, depth - 1)
                 next_score = next_move_score[1]
                 move_score.append((m, next_score))
         return self.get_best_action(maximize, move_score)
@@ -68,20 +71,3 @@ class MinimaxPlayer(PlayerInterface):
                 best_score = score
                 best_move = move
         return (best_move, best_score)
-
-    def set_color(self, color):
-        """
-        Let this player know their color.
-        Should only be set once, ignore all other calls after the first
-
-        Color -> void
-        """
-        if self.color is None:
-            self.color = color
-
-    def update_move(self, move):
-        self.game_tree = self.game_tree.apply_move(move)
-
-    def set_gametree(self, tree):
-        self.game_tree = tree
-        

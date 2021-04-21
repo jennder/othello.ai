@@ -11,7 +11,6 @@ Each position on board is one of: Color or None
 class Board:
     BOARD_SIZE = 8
     def __init__(self):
-        #TODO
         self.board = [[None] * self.BOARD_SIZE for _ in range(0, self.BOARD_SIZE)]
         self.__initialize_board()
 
@@ -140,5 +139,5 @@ class Board:
         void -> Board
         """
         new_board = Board()
-        new_board.board = [row[:] for row in self.board] #TODO make sure this is a deep copy
+        new_board.board = [row[:] for row in self.board]
         return new_board
