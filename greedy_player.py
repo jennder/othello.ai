@@ -20,7 +20,7 @@ class GreedyPlayer(PlayerInterface):
         moves = tree.get_actions()
         # Skip if there are no possible moves
         if (len(moves) == 0):
-            return (SKIP, 0)
+            return (SKIP, tree.get_score(self.color))
         best = max(moves, key=lambda m: tree.children[m].get_score(self.color))
         return best
         

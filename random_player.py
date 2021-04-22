@@ -21,6 +21,6 @@ class RandomPlayer(PlayerInterface):
         moves = tree.get_actions()
         # Skip if there are no possible moves
         if (len(moves) == 0):
-            return (SKIP, 0)
+            return (SKIP, tree.get_score(self.color))
         return random.choice(moves)
         

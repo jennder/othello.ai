@@ -36,7 +36,7 @@ class MinimaxPlayer(PlayerInterface):
         moves = tree.get_actions()
         # Skip if there are no possible moves
         if (len(moves) == 0):
-            return (SKIP, 0)
+            return (SKIP, tree.get_score(self.color))
         move_score = []
         maximize = tree.curr_turn == self.color
 
