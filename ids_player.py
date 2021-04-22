@@ -1,5 +1,4 @@
 from player_interface import PlayerInterface
-from game_tree import GameTree
 from constants import SKIP
 
 """A player who does iterative deepening search.

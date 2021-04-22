@@ -1,5 +1,5 @@
 
-from player_interface import PlayerInterface
+from minimax_player import MinimaxPlayer
 from game_tree import GameTree
 from constants import SKIP
 

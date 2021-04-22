@@ -1,11 +1,8 @@
 from player_interface import PlayerInterface
-from game_tree import GameTree
 from constants import SKIP
-import math
-from operator import ge, le
 
-"""A minimax player who maximizes their move assuming
-others are adversarial players. Depth of 2 by default.
+"""A minimax player who maximizes their move assuming others are adversarial
+players, with alpha beta pruning. Depth of 2 by default.
 """
 class AlphaBetaPlayer(PlayerInterface):
 
@@ -23,6 +20,12 @@ class AlphaBetaPlayer(PlayerInterface):
         return self.maxValue(tree, self.DEPTH, -float("inf"), float("inf"))[0]
 
     def maxValue(self, tree, depth, alpha, beta):
+        """
+        Maximizes the value for this AI player with alpha beta pruning,
+        and assuming the opponent will minimize the score. Does alpha beta pruning.
+
+        GameTree Nat int int -> (Tupleof Posn Nat)
+        """
         # the game has ended
         if tree.is_game_over():
             return (None, tree.get_score(self.color))
@@ -34,7 +37,7 @@ class AlphaBetaPlayer(PlayerInterface):
 
         bestVal = -float("inf")
         for action in moves:
-            valForAction = self.minValue(tree.children[action], depth, 1, alpha, beta)[1]
+            valForAction = self.minValue(tree.children[action], depth, alpha, beta)[1]
             if valForAction > bestVal:
                 bestAction = action
                 bestVal = valForAction
@@ -43,7 +46,13 @@ class AlphaBetaPlayer(PlayerInterface):
                 break
         return (bestAction, bestVal)
 
-    def minValue(self, tree, depth, agent, alpha, beta):
+    def minValue(self, tree, depth, alpha, beta):
+        """
+        When it is the opponent player's turn, they will minimize this player's score.
+        Does alpha beta pruning.
+
+        GameTree Nat int int -> (Tupleof Posn Nat)
+        """
         # the game has ended
         if tree.is_game_over():
             return (None, tree.get_score(self.color))

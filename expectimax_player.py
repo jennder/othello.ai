@@ -1,9 +1,4 @@
-# from player_interface import
 from minimax_player import MinimaxPlayer
-from game_tree import GameTree
-from constants import SKIP
-import math
-from operator import ge, le
 
 """A minimax player who maximizes their move assuming
 others are adversarial players. Depth 2 by default.
