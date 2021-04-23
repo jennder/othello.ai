@@ -7,6 +7,8 @@ from alphabeta_player import AlphaBetaPlayer
 from heuristic_player import HeuristicPlayer
 from referee import Referee
 from constants import player_types, BLACK, WHITE
+
+from collections import Counter
 import pandas as pd
 
 def player_factory(name):
@@ -84,17 +86,31 @@ def run_game(nameA, nameB):
         ("DIFFERENCE", abs(black_score - white_score) / (black_score + white_score))
     ])
 
-"""
-Run every type of player against each other and itself in a round robin format.
-If the two players are not the same type, the players will play two games,
-switching who is the black versus white player in each game
-Saves the results of the games in a CSV file
-"""
-for i, nameA in enumerate(player_types):
-    for nameB in player_types[i:]:
-        run_game(nameA, nameB)
-        if not nameA == nameB:
-            run_game(nameB, nameA)
+def run_tournament():
+    """
+    Run every type of player against each other and itself in a round robin format.
+    If the two players are not the same type, the players will play two games,
+    switching who is the black versus white player in each game
+    Saves the results of the games in a CSV file
+    """
+    for i, nameA in enumerate(player_types):
+        for nameB in player_types[i:]:
+            run_game(nameA, nameB)
+            if not nameA == nameB:
+                run_game(nameB, nameA)
 
-df = pd.DataFrame(data=data)
-df.to_csv("tournament.csv")
+    df = pd.DataFrame(data=data)
+    df.to_csv("tournament.csv")
+
+def analyze():
+    df = pd.read_csv("tournament.csv")
+    data = df.to_dict(orient="list")
+    black_col = data[BLACK]
+    white_col = data[WHITE]
+    winner_col = data["WINNER"]
+
+    winners = [black_col[i] if w == BLACK else white_col[i] for i, w in enumerate(winner_col) if w]
+    print(Counter(winners))
+    print(Counter(winner_col))
+
+analyze()
