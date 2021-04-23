@@ -1,5 +1,6 @@
 from player_interface import PlayerInterface
 from constants import SKIP
+import random
 
 """A player who does iterative deepening search.
 Maxes out at depth search 6 (for timing efficiency)
@@ -21,12 +22,12 @@ class IterativeDeepeningPlayer(PlayerInterface):
             if winning_moves is not False and len(winning_moves) > 0:
                 return winning_moves[0]
             
-        # if no good moves exist to get to goal state, default to the first possible move
+        # if no good moves exist to get to goal state, default to a random move
         all_moves = self.game_tree.get_actions()
         if len(all_moves) == 0:
             return SKIP
         else:
-            return all_moves[0]
+            return random.choice(all_moves)
         
     def __depth_limited(self, depth_cutoff):
         initial = (self.game_tree, [])

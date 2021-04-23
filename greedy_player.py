@@ -13,13 +13,10 @@ class GreedyPlayer(PlayerInterface):
 
         Board -> Posn
         """
-        tree = self.game_tree
-        if tree.is_game_over():
-            return (None, tree.get_score(self.color))
-        moves = tree.get_actions()
+        moves = self.game_tree.get_actions()
         # Skip if there are no possible moves
         if (len(moves) == 0):
-            return (SKIP, tree.get_score(self.color))
-        best = max(moves, key=lambda m: tree.children[m].get_score(self.color))
+            return SKIP
+        best = max(moves, key=lambda m: self.game_tree.children[m].get_score(self.color))
         return best
         
