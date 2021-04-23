@@ -141,3 +141,94 @@ class Board:
         new_board = Board()
         new_board.board = [row[:] for row in self.board]
         return new_board
+
+    def four_corners(self, color):
+        """
+        Get number of corners occupied by given player color.
+
+        Color -> Nat
+        """
+        count = 0
+        if self.occupied_by(color, 0, 0):
+            count += 1
+        if self.occupied_by(color, 0, 7):
+            count += 1
+        if self.occupied_by(color, 7, 0):
+            count += 1
+        if self.occupied_by(color, 7, 7):
+            count += 1
+
+        return count
+
+    def occupied_by(self, color, row, col):
+        """Is the tile occupied by the given color?
+
+        Color Nat[0, 7] Nat[0, 7] -> Boolean
+        """
+        return self.board[row][col] == color
+
+    def check_row(self, color, row, lower, upper):
+        """
+        Get number of tiles occupied by given player color in given row
+        for tiles in columns [lower, upper]
+
+        Color Nat[0, 7] Nat[0, 7] Nat[0, 7] -> Nat
+        """
+        count = 0
+        for col in range(lower, upper + 1):
+            if self.occupied_by(color, row, col):
+                count += 1
+
+        return count
+
+    def check_col(self, color, col, lower, upper):
+        """
+        Get number of tiles occupied by given player color in given col
+        for tiles in rows [lower, upper]
+
+        Color Nat[0, 7] Nat[0, 7] Nat[0, 7] -> Nat
+        """
+        count = 0
+        for row in range(lower, upper + 1):
+            if self.occupied_by(color, row, col):
+                count += 1
+        return count
+
+    def num_in_danger(self, color):
+        """
+        Return the number of pieces the given player color has in the danger zone.
+        The danger zone in Othello is defined as all tiles 1 away from each edge:
+        +-----+-----+-----+-----+
+        |     |     |     |       ...
+        +-----+-----+-----+-----+
+        |     |  x  |  x  |  x                  # shown: top left of board
+        +-----+-----+-----+-----+
+        |     |  x  |     | 
+        +-----+-----+-----+-----+
+        |     |  x  |     | 
+        ...
+
+        Color -> Nat
+        """
+        top = self.check_row(color, 1, 1, 6)
+        bottom = self.check_row(color, 6, 1, 6)
+        left = self.check_col(color, 1, 2, 5) # don't count corners twice
+        right = self.check_col(color, 6, 2, 5)
+        return top + bottom + left + right
+
+    def num_edges(self, color):
+        """
+        Return the number of pieces the given player has on edges:
+        +-----+-----+-----+
+        |  x  |  x  |  x
+        +-----+-----+-----+
+        |  x  |     | ...           # shown: top left of board
+        +-----+-----+-----+
+        |  x  | ... | ...
+        +-----+-----+-----+
+        """
+        top = self.check_row(color, 0, 0, 7)
+        bottom = self.check_row(color, 7, 0, 7)
+        left = self.check_col(color, 0, 1, 6) # don't count corners twice
+        right = self.check_col(color, 7, 1, 6)
+        return top + bottom + left + right

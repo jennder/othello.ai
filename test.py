@@ -6,6 +6,7 @@ from random_player import RandomPlayer
 from expectimax_player import ExpectimaxPlayer
 from ids_player import IterativeDeepeningPlayer
 from alphabeta_player import AlphaBetaPlayer
+from heuristic_player import HeuristicPlayer
 from referee import Referee
 
 def board_test():
@@ -39,11 +40,12 @@ def game_test(player1, player2):
     scores = ref.play_game()
     print("GAME RESULTS: ", scores)
 
-game_test(IterativeDeepeningPlayer(), IterativeDeepeningPlayer())
-game_test(MinimaxPlayer(), MinimaxPlayer())
-game_test(GreedyPlayer(), GreedyPlayer())
-game_test(RandomPlayer(), RandomPlayer())
-game_test(ExpectimaxPlayer(), ExpectimaxPlayer())
-game_test(AlphaBetaPlayer(), AlphaBetaPlayer())
+game_test(HeuristicPlayer(), HeuristicPlayer())
+# game_test(IterativeDeepeningPlayer(), IterativeDeepeningPlayer())
+# game_test(MinimaxPlayer(), MinimaxPlayer())
+# game_test(GreedyPlayer(), GreedyPlayer())
+# game_test(RandomPlayer(), RandomPlayer())
+# game_test(ExpectimaxPlayer(), ExpectimaxPlayer())
+# game_test(AlphaBetaPlayer(), AlphaBetaPlayer())
 # board_game_test()
 # board_test()

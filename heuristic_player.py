@@ -11,7 +11,7 @@ Heuristics include:
 """
 class HeuristicPlayer(MinimaxPlayer):
     
-    def get_move(self):
+    def get_move(self, board):
         tree = self.game_tree
         best_action = self.get_minimax_score(tree, self.depth * 2) # *2 for num players
         return best_action[0]
@@ -36,7 +36,7 @@ class HeuristicPlayer(MinimaxPlayer):
         if depth == 1:
             for m in moves:
                 next_game = tree.children[m]
-                next_score = next_game.get_score(self.color) #TODO add heuristics
+                next_score = next_game.get_score(self.color) + self.get_heuristic_score(tree)
                 move_score.append((m, next_score))
         else:
             for m in moves:
@@ -45,3 +45,16 @@ class HeuristicPlayer(MinimaxPlayer):
                 next_score = next_move_score[1]
                 move_score.append((m, next_score))
         return self.get_best_action(maximize, move_score)
+
+    def get_heuristic_score(self, tree):
+        """
+        Get the heuristics score for this player. The heuristic is a combination
+        of several observations on the game state:
+            - Four corners
+            - (Not) in danger zone
+            - Edges
+        """
+        corners = tree.board.four_corners(self.color)
+        danger = 20 - tree.board.num_in_danger(self.color) # cannot be negative, at max num_in danger returns 20
+        edges = tree.board.num_edges(self.color)
+        return corners + danger + edges

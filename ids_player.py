@@ -2,10 +2,10 @@ from player_interface import PlayerInterface
 from constants import SKIP
 
 """A player who does iterative deepening search.
-Maxes out at depth search 4
+Maxes out at depth search 6 (for timing efficiency)
 """
 class IterativeDeepeningPlayer(PlayerInterface):
-    def __init__(self, depth=4):
+    def __init__(self, depth=6):
         super().__init__()
         self.depth = depth
 
@@ -51,5 +51,7 @@ class IterativeDeepeningPlayer(PlayerInterface):
 
         GameTree -> Boolean
         """ 
+        leader = tree.get_leader() == self.color
+        corners = tree.board.four_corners(self.color) > 0
         #TODO determine what a goal state is
-        return tree.get_leader() == self.color
+        return leader or corners
