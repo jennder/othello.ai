@@ -2,7 +2,26 @@ from constants import BLACK, WHITE
 
 """A Board is represented by a 2-D array
 - Represents a standard board for Othello
-- Coordinate system, see README
+- Coordinate system (the initial board is shown):
+    Posn is a (Nat[0, 7], Nat[0, 7])
+            - Represents a position on the board (row, col)
+    +-----+-----+-----+-----+-----+-----+-----+-----+
+    | 0,0 | 1,0 | 2,0 |     |     |     |     | 7,0 |
+    +-----+-----+-----+-----+-----+-----+-----+-----+
+    | 0,1 |     |     |     |     |     |     |     |
+    +-----+-----+-----+-----+-----+-----+-----+-----+
+    | 0,2 |     |     |     |     |     |     |     |
+    +-----+-----+-----+-----+-----+-----+-----+-----+
+    |     |     |     |  w  |  b  |     |     |     |
+    +-----+-----+-----+-----+-----+-----+-----+-----+
+    |     |     |     |  b  |  w  |     |     |     |
+    +-----+-----+-----+-----+-----+-----+-----+-----+
+    |     |     |     |     |     |     |     |     |
+    +-----+-----+-----+-----+-----+-----+-----+-----+
+    |     |     |     |     |     |     |     |     |
+    +-----+-----+-----+-----+-----+-----+-----+-----+
+    | 0,7 |     |     |     |     |     |     | 7,7 |
+    +-----+-----+-----+-----+-----+-----+-----+-----+
 
 Each position on board is one of: Color or None
     - if color, that player is on the board at that position

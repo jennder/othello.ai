@@ -1,28 +1,22 @@
 # othello.ai
 an AI that plays games
 
-## Data Definitions
+## Example Usage
+To download all relevant Python packages, run:
+
+`pip install -r requirements.txt`
+
+To run the tournament with all players, run:
+
+`python tournament.py`
+
+## Directory Structure:
 ```
-Color is one of: "black" or "white"
-
-Posn is a (Nat[0, 7], Nat[0, 7])
-- Represents a position on the board (row, col)
-+-----+-----+-----+-----+-----+-----+-----+-----+
-| 0,0 | 1,0 | 2,0 |     |     |     |     | 7,0 |
-+-----+-----+-----+-----+-----+-----+-----+-----+
-| 0,1 |     |     |     |     |     |     |     |
-+-----+-----+-----+-----+-----+-----+-----+-----+
-| 0,2 |     |     |     |     |     |     |     |
-+-----+-----+-----+-----+-----+-----+-----+-----+
-|     |     |     |  w  |  b  |     |     |     |
-+-----+-----+-----+-----+-----+-----+-----+-----+
-|     |     |     |  b  |  w  |     |     |     |
-+-----+-----+-----+-----+-----+-----+-----+-----+
-|     |     |     |     |     |     |     |     |
-+-----+-----+-----+-----+-----+-----+-----+-----+
-|     |     |     |     |     |     |     |     |
-+-----+-----+-----+-----+-----+-----+-----+-----+
-| 0,7 |     |     |     |     |     |     | 7,7 |
-+-----+-----+-----+-----+-----+-----+-----+-----+
-
+board.py                # Internal representation of the Othello game board
+constants.py            # Gameplay constants, including player_types
+*_player.py             # The different AI players
+player_interface.py     # All methods which need to be overriden by AI players
+referee.py              # The referee who runs each game in the tournament
+tournament.py           # Script to run the tournament of all players in player_types (see constants.py)
+test.py                 # Scratch file for ad hoc testing 1v1 players
 ```

@@ -1,4 +1,8 @@
 """Represents interface for any AI player
+Each player keeps track of the current GameTree to decide
+what moves to play next, and its color.
+
+A Color is one of: "black" or "white"
 """
 class PlayerInterface:
 

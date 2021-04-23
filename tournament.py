@@ -4,7 +4,7 @@ from random_player import RandomPlayer
 from expectimax_player import ExpectimaxPlayer
 from ids_player import IterativeDeepeningPlayer
 from alphabeta_player import AlphaBetaPlayer
-# Add heuristic later
+from heuristic_player import HeuristicPlayer
 from referee import Referee
 from constants import player_types, BLACK, WHITE
 import pandas as pd
@@ -19,7 +19,9 @@ def player_factory(name):
         "MINIMAX": MinimaxPlayer(),
         "EXPECTIMAX": ExpectimaxPlayer(),
         "IDS": IterativeDeepeningPlayer(),
-        "ALPHABETA": AlphaBetaPlayer()
+        "ALPHABETA": AlphaBetaPlayer(),
+        "HEURISTIC": HeuristicPlayer(),
+        "MINIMAX3": MinimaxPlayer(3)
     }
     return players[name]
 
