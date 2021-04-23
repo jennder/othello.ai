@@ -5,9 +5,9 @@ from constants import SKIP
 
 """Minimax player with added heuristics.
 Heuristics include:
-    - Corners occupied by this player
+    - Corners occupied by this player (effectively a bonus on top of edges)
     - Pieces not in danger zone
-
+    - Edges occupied by this player
 """
 class HeuristicPlayer(MinimaxPlayer):
     

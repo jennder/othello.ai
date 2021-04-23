@@ -10,7 +10,7 @@ To run the tournament with all players, run:
 
 `python tournament.py`
 
-## Directory Structure:
+## Directory Structure
 ```
 board.py                # Internal representation of the Othello game board
 constants.py            # Gameplay constants, including player_types

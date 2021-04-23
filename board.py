@@ -168,13 +168,14 @@ class Board:
         Color -> Nat
         """
         count = 0
+        edge = self.BOARD_SIZE - 1
         if self.occupied_by(color, 0, 0):
             count += 1
-        if self.occupied_by(color, 0, 7):
+        if self.occupied_by(color, 0, edge):
             count += 1
-        if self.occupied_by(color, 7, 0):
+        if self.occupied_by(color, edge, 0):
             count += 1
-        if self.occupied_by(color, 7, 7):
+        if self.occupied_by(color, edge, edge):
             count += 1
 
         return count
@@ -229,10 +230,11 @@ class Board:
 
         Color -> Nat
         """
-        top = self.check_row(color, 1, 1, 6)
-        bottom = self.check_row(color, 6, 1, 6)
-        left = self.check_col(color, 1, 2, 5) # don't count corners twice
-        right = self.check_col(color, 6, 2, 5)
+        edge = self.BOARD_SIZE - 2
+        top = self.check_row(color, 1, 1, edge)
+        bottom = self.check_row(color, edge, 1, edge)
+        left = self.check_col(color, 1, 2, edge - 1) # don't count corners twice
+        right = self.check_col(color, edge, 2,  edge - 1)
         return top + bottom + left + right
 
     def num_edges(self, color):
@@ -246,8 +248,9 @@ class Board:
         |  x  | ... | ...
         +-----+-----+-----+
         """
-        top = self.check_row(color, 0, 0, 7)
-        bottom = self.check_row(color, 7, 0, 7)
-        left = self.check_col(color, 0, 1, 6) # don't count corners twice
-        right = self.check_col(color, 7, 1, 6)
+        edge = self.BOARD_SIZE - 1
+        top = self.check_row(color, 0, 0, edge)
+        bottom = self.check_row(color, edge, 0, edge)
+        left = self.check_col(color, 0, 1, edge - 1) # don't count corners twice
+        right = self.check_col(color, edge, 1, edge - 1)
         return top + bottom + left + right
