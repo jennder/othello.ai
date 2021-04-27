@@ -65,7 +65,7 @@ class AlphaBetaPlayer(PlayerInterface):
         best_val = float("inf")
         for action in moves:
             if depth == 1:
-                val_action = tree.children[action].get_score(tree.curr_turn)
+                val_action = tree.children[action].get_score(self.color)
             else:
                 val_action = self.max_value(tree.children[action], depth - 1, alpha, beta)[1]
 

@@ -1,7 +1,7 @@
 from player_interface import PlayerInterface
 from constants import SKIP
 import math
-from operator import ge, le
+from operator import gt, lt
 
 """A minimax player who maximizes their move assuming
 others are adversarial players. Depth of 2 by default.
@@ -60,7 +60,7 @@ class MinimaxPlayer(PlayerInterface):
         """
         best_score = math.inf
         best_move = None
-        comparator = ge if maximize else le
+        comparator = gt if maximize else lt
         if maximize:
             best_score *= -1
         for move_score in move_scores:

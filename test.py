@@ -40,7 +40,7 @@ def game_test(player1, player2):
     scores = ref.play_game()
     print("GAME RESULTS: ", scores)
 
-game_test(HeuristicPlayer(), HeuristicPlayer())
+# game_test(HeuristicPlayer(), HeuristicPlayer())
 # game_test(IterativeDeepeningPlayer(), IterativeDeepeningPlayer())
 # game_test(MinimaxPlayer(), MinimaxPlayer())
 # game_test(GreedyPlayer(), GreedyPlayer())
