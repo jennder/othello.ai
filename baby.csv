@@ -1,0 +1,15 @@
+,black,white,BLACK_SCORE,WHITE_SCORE,WINNER,DIFFERENCE
+0,random,minimax1,34.0,30.0,black,0.0625
+1,minimax1,random,30.0,17.666666666666668,black,0.2587412587412587
+2,greedy,minimax1,9.0,55.0,white,0.71875
+3,minimax1,greedy,41.0,23.0,black,0.28125
+4,minimax,minimax1,25.0,39.0,white,0.21875
+5,minimax1,minimax,16.0,48.0,white,0.5
+6,expectimax,minimax1,38.0,26.0,black,0.1875
+7,minimax1,expectimax,46.0,18.0,black,0.4375
+8,ids,minimax1,19.0,45.0,white,0.40625
+9,minimax1,ids,23.0,0.0,black,1.0
+10,alphabeta,minimax1,25.0,39.0,white,0.21875
+11,minimax1,alphabeta,16.0,48.0,white,0.5
+12,heuristic,minimax1,36.0,28.0,black,0.125
+13,minimax1,heuristic,14.0,50.0,white,0.5625

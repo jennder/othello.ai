@@ -23,7 +23,8 @@ def player_factory(name):
         "IDS": IterativeDeepeningPlayer(),
         "ALPHABETA": AlphaBetaPlayer(),
         "HEURISTIC": HeuristicPlayer(),
-        "MINIMAX3": MinimaxPlayer(3)
+        "MINIMAX3": MinimaxPlayer(3),
+        "MINIMAX1": MinimaxPlayer(1)
     }
     return players[name]
 
@@ -113,4 +114,19 @@ def analyze():
     print(Counter(winners))
     print(Counter(winner_col))
 
-analyze()
+def run_baby():
+    """
+    Only run minimax1 player against other players
+    """
+    nameB = "MINIMAX1"
+    for nameA in player_types[:-1]:
+        run_game(nameA, nameB)
+        if not nameA == nameB:
+            run_game(nameB, nameA)
+
+    df = pd.DataFrame(data=data)
+    df.to_csv("baby.csv")
+
+# analyze()
+# run_tournament()
+run_baby()
